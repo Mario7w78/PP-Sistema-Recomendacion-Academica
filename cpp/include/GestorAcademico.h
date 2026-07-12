@@ -31,8 +31,8 @@ public:
     // Agrega una nota al historial si el curso existe
     bool agregarRegistroHistorial(const RegistroHistorial& registro);
 
-    // Agrega un area de interes para un estudiante
-    void agregarInteres(const Interes& interes);
+    // Agrega un area de interes para un estudiante si el area es valida
+    bool agregarInteres(const Interes& interes);
 
     // Verifica si existe informacion minima cargada en el sistema
     bool estaVacio() const;

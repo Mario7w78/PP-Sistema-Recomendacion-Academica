@@ -1,4 +1,5 @@
 #include "Utilidades.h"
+#include "Modelos.h"
 
 #include <iostream>
 #include <sstream>
@@ -66,6 +67,19 @@ string leerTextoNoVacio(const string& mensaje) {
     } while (valor.empty());
 
     return valor;
+}
+
+// Repite la lectura hasta que el area coincida con una de las areas de la malla curricular
+string leerAreaAcademicaValida(const string& mensaje) {
+    while (true) {
+        string area = leerTextoNoVacio(mensaje);
+
+        if (esAreaAcademicaValida(area)) {
+            return area;
+        }
+
+        cout << "Area no valida. Ingrese una de las areas disponibles\n";
+    }
 }
 
 // Valida la lectura de enteros para evitar que el programa falle si el usuario escribe texto

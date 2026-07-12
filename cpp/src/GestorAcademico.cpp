@@ -15,7 +15,7 @@ void GestorAcademico::cargarDatos(const vector<Curso>& nuevosCursos,
 
 // Agrega un curso evitando codigos duplicados
 bool GestorAcademico::agregarCurso(const Curso& curso) {
-    if (existeCurso(curso.codigo)) {
+    if (existeCurso(curso.codigo) || !esAreaAcademicaValida(curso.area)) {
         return false;
     }
 
@@ -43,9 +43,14 @@ bool GestorAcademico::agregarRegistroHistorial(const RegistroHistorial& registro
     return true;
 }
 
-// Agrega un area de interes sin validar contra cursos porque puede usarse luego en Prolog
-void GestorAcademico::agregarInteres(const Interes& interes) {
+// Agrega un area de interes solo si pertenece a las areas de la malla curricular
+bool GestorAcademico::agregarInteres(const Interes& interes) {
+    if (!esAreaAcademicaValida(interes.area)) {
+        return false;
+    }
+
     intereses.push_back(interes);
+    return true;
 }
 
 // El sistema se considera vacio cuando no hay cursos cargados

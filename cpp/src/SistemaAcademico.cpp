@@ -78,7 +78,7 @@ void SistemaAcademico::registrarCurso() {
     cout << "\nAreas disponibles: General, Matematica, General_Ingenieria, General_Sistemas, Software, Procesos, Datos, IA, TI\n";
     curso.codigo = leerTextoNoVacio("Codigo del curso: ");
     curso.nombre = leerTextoNoVacio("Nombre del curso: ");
-    curso.area = leerTextoNoVacio("Area academica: ");
+    curso.area = leerAreaAcademicaValida("Area academica: ");
     curso.creditos = leerEnteroEnRango("Creditos: ", 1, 8);
 
     if (gestor.agregarCurso(curso)) {
@@ -124,12 +124,16 @@ void SistemaAcademico::registrarNota() {
 void SistemaAcademico::registrarInteres() {
     Interes interes;
 
+    cout << "\nAreas disponibles: General, Matematica, General_Ingenieria, General_Sistemas, Software, Procesos, Datos, IA, TI\n";
     interes.estudiante = leerTextoNoVacio("Identificador del estudiante: ");
-    interes.area = leerTextoNoVacio("Area de interes: ");
+    interes.area = leerAreaAcademicaValida("Area de interes: ");
 
-    gestor.agregarInteres(interes);
-    guardarTodo();
-    cout << "Interes registrado correctamente\n";
+    if (gestor.agregarInteres(interes)) {
+        guardarTodo();
+        cout << "Interes registrado correctamente\n";
+    } else {
+        cout << "No se registro el interes porque el area no es valida\n";
+    }
 }
 
 // Recorre todos los cursos y muestra codigo, nombre, area y creditos
